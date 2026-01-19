@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>デジタル学生証 - IRIS School</title>
+    
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="学生証">
+    
+    <style>
+        :root {
+            --primary-color: #4A90E2;
+            --card-bg: #ffffff;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            -webkit-user-select: none;
+        }
+
+        .id-card {
+            width: 320px;
+            height: 500px;
+            background: var(--card-bg);
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            overflow: hidden;
+            position: relative;
+            border: 1px solid #ddd;
+        }
+
+        .header {
+            background: var(--primary-color);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .photo-area {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .photo-area img {
+            width: 150px;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 3px solid #eee;
+            background: #fafafa;
+        }
+
+        .info-area {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .student-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .student-id {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        .qr-area {
+            margin-top: 10px;
+            padding: 10px;
+            background: #f9f9f9;
+            display: inline-block;
+            border-radius: 5px;
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background: #eee;
+            padding: 10px 0;
+            text-align: center;
+            font-size: 0.7rem;
+            color: #888;
+        }
+
+        .secure-bar {
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #4A90E2, #50E3C2, #4A90E2);
+            background-size: 200% 100%;
+            animation: moveBar 3s linear infinite;
+        }
+
+        @keyframes moveBar {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 200% 0%; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="id-card">
+    <div class="header">DIGITAL STUDENT ID</div>
+    <div class="secure-bar"></div>
+    
+    <div class="photo-area">
+        <img src="https://via.placeholder.com/150x180?text=PHOTO" alt="学生写真">
+    </div>
+
+    <div class="info-area">
+        <div class="student-name">山田 太郎</div>
+        <div class="student-id">学籍番号: 2026-0001</div>
+        
+        <div class="qr-area">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=2026-0001" alt="QR Code">
+        </div>
+    </div>
+
+    <div class="footer">
+        有効期限: 2027年3月31日まで<br>
+        &copy; 2026 IRIS Academy
+    </div>
+</div>
+
+<script>
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('sw.js').then(() => {
+            console.log('Service Worker Registered');
+        });
+    }
+</script>
+</body>
+</html>
